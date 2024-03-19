@@ -15,12 +15,13 @@ class Ingredient(models.Model):
 
 
 class Receipe(models.Model):
-    name = models.CharField(max_length=100, null=True)
+    name = models.ForeignKey(
+        Ingredient, on_delete=models.CASCADE, max_length=100, null=True)
     quantity = models.IntegerField(null=True)
     unit = models.CharField(choices=CHOICES, max_length=100, null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}-{self.quantity}-{self.unit}'
 
 
 class MenuItem(models.Model):

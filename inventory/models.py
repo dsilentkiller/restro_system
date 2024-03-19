@@ -15,6 +15,13 @@ class Table(models.Model):
         return self.name
 
 
+class Item(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -69,6 +76,7 @@ class Order(models.Model):
 
 
 class StockReport(models.Model):
+
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
