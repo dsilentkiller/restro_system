@@ -2,7 +2,7 @@ from django.shortcuts import render
 from inventory.models import Inventory, Order, Purchase, StockReport
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from inventory.forms import InventoryForm
+from inventory.forms import InventoryForm, PurchaseForm, OrderForm
 
 
 def base(request):
@@ -52,7 +52,7 @@ class OrderListView(ListView):
 
 class OrderCreateView(CreateView):
     model = Order
-    form_class = InventoryForm
+    form_class = OrderForm
     template = 'inventory/order_form.html'
     success_url = reverse_lazy('inventory:order_list')
     # order = Order.objects.all()
@@ -60,7 +60,7 @@ class OrderCreateView(CreateView):
 
 class OrderUpdateView(UpdateView):
     model = Order
-    form_class = InventoryForm
+    form_class = OrderForm
     template = 'inventory/order_form.html'
     success_url = reverse_lazy('inventory:order_list')
 
@@ -86,7 +86,7 @@ class PurchaseListView(ListView):
 
 class PurchaseCreateView(CreateView):
     model = Purchase
-    form_class = InventoryForm
+    form_class = PurchaseForm
     template = 'purchase/purchase_form.html'
     success_url = reverse_lazy('inventory:purchase_index')
     # order = Order.objects.all()
@@ -94,7 +94,7 @@ class PurchaseCreateView(CreateView):
 
 class PurchaseUpdateView(UpdateView):
     model = Purchase
-    form_class = InventoryForm
+    form_class = PurchaseForm
     template = 'purchase/purchase_form.html'
     success_url = reverse_lazy('inventory:purchase_index')
 
@@ -117,4 +117,3 @@ class StockReportListView(ListView):
     model = StockReport
     template = 'inventory/stock_report_list.html'
     success_url = reverse_lazy('inventory:stock_report')
-    
