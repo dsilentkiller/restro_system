@@ -1,10 +1,12 @@
 from django.db import models
+from menu.models import Ingredient,Category
 
 CHOICES = (('kg', 'kg'),
            ('gm', 'gm'),
            ('piece', 'piece'),
            ('ml', 'ml'),
-           ('liter', 'liter'),)
+           ('liter', 'liter'),
+           ('plate', 'plate'),)
 
 
 class Table(models.Model):
@@ -22,17 +24,11 @@ class Item(models.Model):
         return self.name
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.name
-
 
 class Purchase(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    item_name = models.CharField(max_length=100)
+    item_name = models.ForeignKey(
+        Ingredient, on_delete=models.CASCADE, max_length=100)
     quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
@@ -46,7 +42,8 @@ class Purchase(models.Model):
 
 class Inventory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    item_name = models.CharField(max_length=100, unique=True)
+    item_name = models.ForeignKey(
+        Ingredient, on_delete=models.CASCADE, max_length=100)
     quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
@@ -59,7 +56,8 @@ class Inventory(models.Model):
 
 class Order(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    item_name = models.CharField(max_length=100)
+    item_name = models.ForeignKey(
+        Item, on_delete=models.CASCADE, max_length=100, null=True)
     quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)

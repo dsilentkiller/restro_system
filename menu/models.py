@@ -1,5 +1,5 @@
 from django.db import models
-from inventory.models import Category
+
 CHOICES = (('kg', 'kg'),
            ('gm', 'gm'),
            ('piece', 'piece'),
@@ -9,6 +9,14 @@ CHOICES = (('kg', 'kg'),
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
 
     def __str__(self):
         return self.name
