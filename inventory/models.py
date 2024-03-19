@@ -25,8 +25,8 @@ class Category(models.Model):
 
 class Purchase(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    item_name = models.CharField(max_length=100, unique=True)
-    quantity = models.IntegerField()
+    item_name = models.CharField(max_length=100)
+    quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
     description = models.TextField()
@@ -40,7 +40,7 @@ class Purchase(models.Model):
 class Inventory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     item_name = models.CharField(max_length=100, unique=True)
-    quantity = models.IntegerField()
+    quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
     description = models.TextField()
@@ -53,7 +53,7 @@ class Inventory(models.Model):
 class Order(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     item_name = models.CharField(max_length=100)
-    quantity = models.IntegerField()
+    quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
     description = models.TextField()
