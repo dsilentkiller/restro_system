@@ -67,7 +67,7 @@ class Order(models.Model):
     # vendor=models.ForeignKey(vendor)
 
     def __str__(self):
-        return self.item_name
+        return f'{self.item_name}-{self.category}'
 
     # def calculate_stock(self):
     #     stock= self.inventory.quantity-order.quantity)
@@ -83,3 +83,6 @@ class StockReport(models.Model):
         order_quantity = self.order.quantity
         remaining_stock = inventory_quantity - order_quantity
         return remaining_stock
+
+    def __str__(self):
+        return f'{self.inventory}-{self.order}'
