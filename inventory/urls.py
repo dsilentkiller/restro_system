@@ -32,7 +32,7 @@ urlpatterns = [
     path('purchase/detail/', views.PurchaseListView.as_view(),
          name='purchase_detail'),
 
-       path('stock/report', views.StockReportListView.as_view(),
+    path('stock/report', views.StockReportListView.as_view(),
          name='stock_report'),
 
 ]

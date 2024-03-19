@@ -115,5 +115,12 @@ class PurchaseDeleteView(DeleteView):
 
 class StockReportListView(ListView):
     model = StockReport
-    template = 'inventory/stock_report_list.html'
-    success_url = reverse_lazy('inventory:stock_report')
+    print('hell')
+    template = 'inventory/stockreport_list.html'
+    print('hell')
+    # success_url = reverse_lazy('inventory:stock_report')
+
+    def stock_remain(request):
+        stock = StockReport.objects.all()
+        print('hello')
+        return render(request, 'inventory/stockreport_list', {'stock_remain': stock})

@@ -51,7 +51,7 @@ class Inventory(models.Model):
     # vendor=models.ForeignKey(vendor)
 
     def __str__(self):
-        return self.item_name
+        return f'{self.item_name}-{self.category}'
 
 
 class Order(models.Model):
