@@ -5,7 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-   
+    <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
   </head>
   <body>
 
@@ -65,13 +68,13 @@
        
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"
-            <a
-            href="{% url 'inventory:list'%}"
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+             <a
+            href="{% url 'menu:category_list'%}"
             class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
             aria-current="page"
-            >Inventory List</a
-          > -->
+            >Category  List</a
+          > 
             <a
               href="{% url 'inventory:list'%}"
               class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"

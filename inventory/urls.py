@@ -20,7 +20,17 @@ urlpatterns = [
 
     path('inventory/order/update/',
          views.OrderUpdateView.as_view(), name='order_update'),
-    path('order/detail/', views.OrderListView.as_view(), name='order_detail'),
+
+
+
+
+    path('inventory/order/detail/',
+         views.OrderListView.as_view(), name='order_detail'),
+    path('inventory/search',
+         views.InventorySearchView.as_view(), name='inventory_search'),
+
+
+
 
     # purchase
     path('purchase/list/', views.PurchaseListView.as_view(), name='purchase_index'),

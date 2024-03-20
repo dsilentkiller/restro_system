@@ -1,16 +1,16 @@
-from django.shortcuts import render
+
 
 # Create your views here.
 from django.shortcuts import render
-from menu.models import MenuItem
+from menu.models import MenuItem, Receipe, Category
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from menu.forms import MenuItemForm
+from menu.forms import MenuItemForm, ReceipeForm, CategoryForm
 
 
 class MenuListView(ListView):
     model = MenuItem
-    template = 'menu/menuitem_list.html'
+    template_name = 'menu/menuitem_list.html'
     success_url = reverse_lazy('menu:list')
     queryset = MenuItem.objects.all()
 
@@ -23,24 +23,117 @@ class MenuListView(ListView):
 class MenuCreateView(CreateView):
     model = MenuItem
     form_class = MenuItemForm
-    template = 'menu/menuitem_form.html'
+    template_name = 'menu/menuitem_form.html'
     success_url = reverse_lazy('menu:list')
 
 
 class MenuUpdateView(CreateView):
     model = MenuItem
     form_class = MenuItemForm
-    template = 'menu/menuitem_form.html'
+    template_name = 'menu/menuitem_form.html'
     success_url = reverse_lazy('menu:list')
 
 
 class MenuDetailView(CreateView):
     model = MenuItem
-    template = 'menu/menu_detail.html'
+    template_name = 'menu/menu_detail.html'
     success_url = reverse_lazy('menu:list')
 
 
 class MenuDeleteView(DeleteView):
     model = MenuItem
-    template = 'menu/delete.html'
+    template_name = 'menu/delete.html'
     success_url = reverse_lazy('menu:list')
+
+# receipe
+
+
+class ReceipeListView(ListView):
+    model = Receipe
+    template_name = 'menu/receipe/receipe_list.html'
+    success_url = reverse_lazy('menu:list')
+    queryset = Receipe.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['receipe'] = self.queryset
+        return context
+
+
+class ReceipeCreateView(CreateView):
+    model = Receipe
+    form_class = ReceipeForm
+    template_name = 'menu/receipe/receipe_form.html'
+    success_url = reverse_lazy('menu:list')
+
+
+class ReceipeUpdateView(CreateView):
+    model = Receipe
+    form_class = ReceipeForm
+    template_name = 'menu/receipe/receipe_form.html'
+    success_url = reverse_lazy('menu:list')
+
+
+class ReceipeDetailView(CreateView):
+    model = Receipe
+    template_name = 'menu/receipe/receipe_detail.html'
+    success_url = reverse_lazy('menu:list')
+
+
+class ReceipeDeleteView(DeleteView):
+    model = Receipe
+    template_name = 'menu/receipe/receipe_delete.html'
+    success_url = reverse_lazy('menu:list')
+
+# category
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'menu/category/category_list.html'
+    success_url = reverse_lazy('menu:category_list')
+    # queryset = Receipe.objects.all()
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['receipe'] = self.queryset
+    #     return context
+
+
+class CategoryCreateView(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'menu/category/category_form.html'
+    success_url = reverse_lazy('menu:category_list')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'menu/category/category_form.html'
+    success_url = reverse_lazy('menu:category_list')
+
+
+class CategoryDetailView(CreateView):
+    model = Category
+    template_name = 'menu/category/category_detail.html'
+    success_url = reverse_lazy('menu:category_list')
+
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'menu/category/category_delete.html'
+    success_url = reverse_lazy('menu:category_list')
+
+
+def SearchView(request):
+    query = request.GET.get('q', '')  # retrieve the search query
+    results = Category.objects.none()  # initialize an empty queryset
+
+    if query:
+
+        results = Category.objects.filter(name__icontains=query)
+
+        return render(request, 'menu/category/category_list.html', {'object_list': results})
+    else:
+        results = Category.objects.none()

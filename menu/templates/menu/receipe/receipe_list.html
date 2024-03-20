@@ -6,9 +6,9 @@
 
   <div class="row">
     <div class="flex items-center justify-between">
-        <h5 class="text-xl font-semibold">Menu List</h5>  
+        <h5 class="text-xl font-semibold">Receipe List</h5>  
         <a href="{% url 'menu:create' %}" class="text-xl font-semibold text-grey-200 hover:underline hover:text-blue-00 ml-auto">
-         <h5>  Add Menu</h5>
+         <h5>  Add Receipe</h5>
         </a>
      
       <form method="get" action="/" class="max-w-md mx-auto px-4 py-2 justify-end">
@@ -37,22 +37,22 @@
             <tr>
               <th class="px-4 py-2 border px-4 py-2" >#</th>
               <th class="px-4 py-2  border ">item Name</th>
-              <th class="px-4 py-2  border ">Category</th>
-              <th  class="px-4 py-2  border ">price</th>       
+              <th class="px-4 py-2  border ">Quantity</th>
+              <th  class="px-4 py-2  border ">Unit</th>       
               <th col="3" class="px-0 py-0  border ">action</th>
             </tr>
           </th>
           <tbody>
-            {% if object_list %} {% for menus in object_list %}
+            {% if object_list %} {% for receipe in object_list %}
             <tr>
-              <td class="border px-4 py-2">{{ menus.id}}</td>
-              <td class="border px-4 py-2">{{ menus.name }}</td>
-              <td class="border px-4 py-2">{{ menus.category }}</td>
-              <td class="border px-4 py-2">{{ menus.price }}</td>
+              <td class="border px-4 py-2">{{ receipe.id}}</td>
+              <td class="border px-4 py-2">{{ receipe.name }}</td>
+              <td class="border px-4 py-2">{{ receipe.quantity }}</td>
+              <td class="border px-4 py-2">{{ receipe.unit }}</td>
               <td>
                 <a  class="border px-4 py-2"  href="{% url 'menu:update'  %}"> Edit </a> 
                 <a class="border px-4 py-2"  href="{% url 'menu:detail' %}"> View </a> 
-                <a  class="border px-4 py-2" href="{% url 'menu:receipe_create'%}" > add receipe </a>
+          
                 <a  class="border px-4 py-2" href="/" > Delete </a>
               </td>
             </tr>

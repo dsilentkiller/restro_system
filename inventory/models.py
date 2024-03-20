@@ -1,5 +1,5 @@
 from django.db import models
-from menu.models import Ingredient,Category
+from menu.models import Ingredient, Category, MenuItem
 
 CHOICES = (('kg', 'kg'),
            ('gm', 'gm'),
@@ -22,7 +22,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class Purchase(models.Model):
@@ -56,8 +55,8 @@ class Inventory(models.Model):
 
 class Order(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    item_name = models.ForeignKey(
-        Item, on_delete=models.CASCADE, max_length=100, null=True)
+    menu_item_name = models.ForeignKey(
+        MenuItem, on_delete=models.CASCADE, max_length=100, null=True)
     quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
@@ -67,7 +66,7 @@ class Order(models.Model):
     # vendor=models.ForeignKey(vendor)
 
     def __str__(self):
-        return f'{self.item_name}-{self.category}'
+        return f'{self.menu_item_name}-{self.category}'
 
     # def calculate_stock(self):
     #     stock= self.inventory.quantity-order.quantity)
@@ -78,11 +77,7 @@ class StockReport(models.Model):
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
-    def stock_remain(self):
-        inventory_quantity = self.inventory.quantity
-        order_quantity = self.order.quantity
-        remaining_stock = inventory_quantity - order_quantity
-        return remaining_stock
+   
 
     def __str__(self):
         return f'{self.inventory}-{self.order}'
