@@ -25,8 +25,10 @@ urlpatterns = [
     path('item/detail/<int:pk>', views.ItemDetailView.as_view(), name='item_detail'),
     path('item/delete/<int:pk>', views.ItemDeleteView.as_view(),
          name='item_delete'),
+    #     path('item/search',
+    #          views.ItemSearchView.as_view(), name='item_search'),
     path('item/search',
-         views.ItemSearchView.as_view(), name='item_search'),
+         views.SearchView, name='item_search'),
 
 
 

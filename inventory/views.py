@@ -112,14 +112,27 @@ class ItemSearchView(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
-    def get_queryset(self, request):
-        query = self.request.GET.get("q", "")
+    # def get_queryset(self, request):
+    #     query = self.request.GET.get("q", "")
+    #     results = Item.objects.none()
+    #     if query:
+    #         results = Item.objects.filter(name__icontains=query)
+    #         return render(request, 'inventory/item/item_list.html', {'item': results})
+    #     else:
+    #         results = Item.objects.none()
+
+
+def SearchView(request):
+    query = request.GET.get('q', '')  # retrieve the search query
+    results = Item.objects.none()  # initialize an empty queryset
+
+    if query:
+
+        results = Item.objects.filter(name__icontains=query)
+
+        return render(request, 'inventory/item/item_list.html', {'object_list': results})
+    else:
         results = Item.objects.none()
-        if query:
-            results = Item.objects.filter(name__icontains=query)
-            return render(request, 'inventory/item/item_list.html', {'item': results})
-        else:
-            results = Item.objects.none()
 
 # ================================================order -============================================================================
 
