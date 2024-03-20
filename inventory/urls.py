@@ -34,14 +34,19 @@ urlpatterns = [
 
 
     # ===================  order================================
-    path('inventory/order/list/', views.OrderListView.as_view(), name='order_index'),
+    path('order/list/', views.OrderListView.as_view(), name='order_list'),
     path('order/create/',
          views.OrderCreateView.as_view(), name='order_create'),
 
-    path('inventory/order/update/',
+    path('order/update/<int:pk>',
          views.OrderUpdateView.as_view(), name='order_update'),
-    path('inventory/order/detail/',
+    path('order/detail/<int:pk>',
          views.OrderListView.as_view(), name='order_detail'),
+    path('order/cancel/<int:pk>',
+         views.OrderCancelView.as_view(), name='order_cancel'),
+    path('order/search/',
+         views.OrderListView.as_view(), name='order_search'),
+
 
 
 
@@ -68,3 +73,16 @@ urlpatterns = [
 if settings.DEBUG:  # new
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+
+# ======================= table=============
+
+    path('table/create/', views.TableCreateView.as_view(), name='table_create'),
+    path('table/list/', views.TableListView.as_view(), name='table_list'),
+    path('table/update/<int:pk>',
+         views.TableUpdateView.as_view(), name='table_update'),
+    path('table/delete/<int:pk>', views.TableDeleteView.as_view(),
+         name='table_delete'),
+    #     path('item/search',
+    #          views.ItemSearchView.as_view(), name='item_search'),
+    path('table/search',
+         views.SearchView, name='table_search'),

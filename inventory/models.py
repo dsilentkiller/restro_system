@@ -60,7 +60,7 @@ class Order(models.Model):
     quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
-    description = models.TextField()
+    remark = models.TextField(null=True)
     table = models.ForeignKey(
         Table, on_delete=models.CASCADE, max_length=100, null=True)
     # vendor=models.ForeignKey(vendor)
@@ -76,8 +76,6 @@ class StockReport(models.Model):
 
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-
-   
 
     def __str__(self):
         return f'{self.inventory}-{self.order}'

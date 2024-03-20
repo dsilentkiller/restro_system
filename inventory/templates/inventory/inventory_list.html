@@ -1,4 +1,4 @@
-{% extends 'inventory/base.html' %} {% block content %} 
+{% extends './base.html' %} {% block content %} 
 
 
 
@@ -38,7 +38,7 @@
               <th class="px-4 py-2 border px-4 py-2" >#</th>
               <th class="px-4 py-2  border ">item Name</th>
               <th class="px-4 py-2  border ">Category</th>
-              <th class="px-4 py-2  border ">Description</th>
+              <th class="px-4 py-2  border ">remark</th>
               <th  class="px-4 py-2  border ">price</th>
               <th class="px-4 py-2  border ">quantity</th>
               <th class="px-4 py-2  border ">unit</th>           
@@ -51,7 +51,7 @@
               <td class="border px-4 py-2">{{ inventory.id}}</td>
               <td class="border px-4 py-2">{{ inventory.item_name }}</td>
               <td class="border px-4 py-2">{{ inventory.category }}</td>
-              <td class="border px-4 py-2">{{ inventory.description }}</td>
+              <td class="border px-4 py-2">{{ inventory.remark }}</td>
               <td class="border px-4 py-2">{{ inventory.price }}</td>
               <td  class="border px-4 py-2">{{ inventory.quantity }}</td>
               <td class="border px-4 py-2">{{ inventory.unit}}</td>         

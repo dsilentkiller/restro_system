@@ -1,5 +1,5 @@
 
-{% extends '../inventory/base.html' %} {% block content %} 
+{% extends 'inventory/base.html' %} {% block content %} 
 
 
 
@@ -12,7 +12,7 @@
          <h5>  Add order</h5>
         </a>
      
-      <form method="get" action="/" class="max-w-md mx-auto px-4 py-2 justify-end">
+      <form method="get" action="{% url 'inventory:order_search' %}%}" class="max-w-md mx-auto px-4 py-2 justify-end">
         <div class="relative">
             <input
             type="search"
@@ -57,9 +57,9 @@
               <td  class="border px-4 py-2">{{ order.quantity }}</td>
               <td class="border px-4 py-2">{{ order.unit}}</td>         
               <td>
-                <a  class="border px-4 py-2"  href="{% url 'inventory:update'  %}"> Edit </a> 
-                <a class="border px-4 py-2"  href="{% url 'inventory:detail' %}"> View </a> 
-                <a  class="border px-4 py-2" href="/" > Delete </a>
+                <a  class="border px-4 py-2"  href="{% url 'inventory:order_update' order.id  %}"> Edit </a> 
+                <a class="border px-4 py-2"  href="{% url 'inventory:order_detail' order.id  %}"> View </a> 
+                <a  class="border px-4 py-2" href="{% url 'inventory:order_cancel' order.id %}" > Cancel </a>
               </td>
             </tr>
           {% endfor %}

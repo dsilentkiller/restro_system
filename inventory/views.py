@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from inventory.models import Inventory, Order, Purchase, StockReport, Item
+from inventory.models import Inventory, Order, Purchase, StockReport, Item, Table
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from inventory.forms import InventoryForm, PurchaseForm, OrderForm, ItemForm
+from inventory.forms import InventoryForm, PurchaseForm, OrderForm, ItemForm, TableForm
 
 
 def base(request):
@@ -133,20 +133,89 @@ def SearchView(request):
         return render(request, 'inventory/item/item_list.html', {'object_list': results})
     else:
         results = Item.objects.none()
+################################################################## table ###########################
+
+
+class TableListView(ListView):
+    model = Table
+    template_name = 'inventory/table/table_list.html'
+    success_url = reverse_lazy('inventory:table_list')
+
+
+class TableCreateView(CreateView):
+    model = Table
+    form_class = TableForm
+    template_name = 'inventory/table/table_form.html'
+    success_url = reverse_lazy('inventory:table_list')
+
+
+class TableUpdateView(UpdateView):
+    model = Table
+    form_class = TableForm
+    template_name = 'inventory/table/table_form.html'
+    success_url = reverse_lazy('inventory:table_list')
+
+
+# class TableDetailView(DetailView):
+#     model = Table
+#     template_name = 'inventory/item/item_detail.html'
+#     success_url = reverse_lazy('inventory:item_list')
+
+
+class TableDeleteView(DeleteView):
+    model = Table
+    template_name = 'inventory/table/table_delete.html'
+    success_url = reverse_lazy('inventory:table_list')
+
+# inventory search using function
+
+
+class TableSearchView(ListView):
+    model = Table
+    template_name = "inventory/table/table_list.html"
+    context_object_name = "table"
+
+    # success_url = reverse_lazy('inventory:item_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    # def get_queryset(self, request):
+    #     query = self.request.GET.get("q", "")
+    #     results = Item.objects.none()
+    #     if query:
+    #         results = Item.objects.filter(name__icontains=query)
+    #         return render(request, 'inventory/item/item_list.html', {'item': results})
+    #     else:
+    #         results = Item.objects.none()
+
+
+def SearchView(request):
+    query = request.GET.get('q', '')  # retrieve the search query
+    results = Table.objects.none()  # initialize an empty queryset
+
+    if query:
+
+        results = Table.objects.filter(name__icontains=query)
+
+        return render(request, 'inventory/table/table_list.html', {'object_list': results})
+    else:
+        results = Table.objects.none()
 
 # ================================================order -============================================================================
 
 
 class OrderListView(ListView):
     model = Order
-    template_name = 'order/order_list.html'
-    success_url = reverse_lazy('inventory:order_index')
+    template_name = 'inventory/order/order_list.html'
+    success_url = reverse_lazy('inventory:order_list')
 
 
 class OrderCreateView(CreateView):
     model = Order
     form_class = OrderForm
-    template_name = 'inventory/order_form.html'
+    template_name = 'inventory/order/order_form.html'
     success_url = reverse_lazy('inventory:order_list')
     # order = Order.objects.all()
 
@@ -154,7 +223,7 @@ class OrderCreateView(CreateView):
 class OrderUpdateView(UpdateView):
     model = Order
     form_class = OrderForm
-    template_name = 'inventory/order_form.html'
+    template_name = 'inventory/order/order_form.html'
     success_url = reverse_lazy('inventory:order_list')
 
 
@@ -164,9 +233,9 @@ class OrderDetailView(DetailView):
     success_url = reverse_lazy('inventory:order_list')
 
 
-class OrderDeleteView(DeleteView):
+class OrderCancelView(DeleteView):
     model = Order
-    template_name = 'inventory/order/order_delete.html'
+    template_name = 'inventory/order/order_cancel.html'
     success_url = reverse_lazy('inventory:order_list')
 # =================================================================purchase==================================
 
