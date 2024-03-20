@@ -39,5 +39,19 @@ urlpatterns = [
     path('receipe/delete/<int:pk>', views.ReceipeDeleteView.as_view(),
          name='receipe_delete'),
 
+    # ingredient
+    path('ingredient/create/', views.IngredientCreateView.as_view(),
+         name='ingredient_create'),
+    path('ingredient/list/', views.IngredientListView.as_view(),
+         name='ingredient_list'),
+    path('ingredient/update/<int:pk>',
+         views.IngredientUpdateView.as_view(), name='ingredient_update'),
+    path('ingredient/detail/<int:pk>',
+         views.IngredientListView.as_view(), name='ingredient_detail'),
+    path('ingredient/delete/<int:pk>', views.IngredientDeleteView.as_view(),
+         name='ingredient_delete'),
+    path('ingredient/search', views.IngredientSearchView,
+         name='ingredient_search'),
+
 
 ]

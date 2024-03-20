@@ -2,10 +2,10 @@
 
 # Create your views here.
 from django.shortcuts import render
-from menu.models import MenuItem, Receipe, Category
+from menu.models import MenuItem, Receipe, Category, Ingredient
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from menu.forms import MenuItemForm, ReceipeForm, CategoryForm
+from menu.forms import MenuItemForm, ReceipeForm, CategoryForm, IngredientForm
 
 
 class MenuListView(ListView):
@@ -85,7 +85,7 @@ class ReceipeDeleteView(DeleteView):
     template_name = 'menu/receipe/receipe_delete.html'
     success_url = reverse_lazy('menu:list')
 
-# category
+# =========================== category==============================
 
 
 class CategoryListView(ListView):
@@ -137,3 +137,56 @@ def SearchView(request):
         return render(request, 'menu/category/category_list.html', {'object_list': results})
     else:
         results = Category.objects.none()
+
+# ================================ ingredient ===========================
+
+
+class IngredientListView(ListView):
+    model = Ingredient
+    template_name = 'menu/ingredient/ingredient_list.html'
+    success_url = reverse_lazy('menu:ingredient_list')
+    # queryset = Receipe.objects.all()
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['receipe'] = self.queryset
+    #     return context
+
+
+class IngredientCreateView(CreateView):
+    model = Ingredient
+    form_class = IngredientForm
+    template_name = 'menu/ingredient/ingredient_form.html'
+    success_url = reverse_lazy('menu:ingredient_list')
+
+
+class IngredientUpdateView(UpdateView):
+    model = Ingredient
+    form_class = Ingredientgit Form
+    template_name = 'menu/ingredient/ingredient_form.html'
+    success_url = reverse_lazy('menu:ingredient_list')
+
+
+class IngredientDetailView(CreateView):
+    model = Ingredient
+    template_name = 'menu/ingredient/ingredient_detail.html'
+    success_url = reverse_lazy('menu:ingredient_list')
+
+
+class IngredientDeleteView(DeleteView):
+    model = Ingredient
+    template_name = 'menu/ingredient/ingredient_delete.html'
+    success_url = reverse_lazy('menu:ingredient_list')
+
+
+def IngredientSearchView(request):
+    query = request.GET.get('q', '')  # retrieve the search query
+    results = Ingredient.objects.none()  # initialize an empty queryset
+
+    if query:
+
+        results = Ingredient.objects.filter(name__icontains=query)
+
+        return render(request, 'menu/ingredient/ingredient_list.html', {'object_list': results})
+    else:
+        results = Ingredient.objects.none()

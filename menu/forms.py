@@ -1,5 +1,5 @@
 from django import forms
-from menu.models import MenuItem, Receipe, Category
+from menu.models import MenuItem, Receipe, Category, Ingredient
 
 
 class MenuItemForm(forms.ModelForm):
@@ -36,6 +36,18 @@ class ReceipeForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'forms.control'}),
             'quantity': forms.TextInput(attrs={'class': 'forms.control'}),
+
+
+        }
+
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = ('__all__')
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'forms.control'}),
+
 
 
         }
