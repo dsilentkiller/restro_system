@@ -37,9 +37,9 @@
           <th class="px-1 py-0">
             <tr>
               <th class="px-4 py-2 border px-4 py-2" >#</th>
-              <th class="px-4 py-2  border ">item Name</th>
+              <th class="px-4 py-2  border ">menu item Name</th>
               <th class="px-4 py-2  border ">Category</th>
-              <th class="px-4 py-2  border ">Description</th>
+              <th class="px-4 py-2  border ">remark</th>
               <th  class="px-4 py-2  border ">price</th>
               <th class="px-4 py-2  border ">quantity</th>
               <th class="px-4 py-2  border ">unit</th>           
@@ -50,9 +50,9 @@
             {% if object_list %} {% for order in object_list %}
             <tr>
               <td class="border px-4 py-2">{{ order.id}}</td>
-              <td class="border px-4 py-2">{{ order.item_name }}</td>
+              <td class="border px-4 py-2">{{ order.menu_item_name }}</td>
               <td class="border px-4 py-2">{{ order.category }}</td>
-              <td class="border px-4 py-2">{{ order.description }}</td>
+              <td class="border px-4 py-2">{{ order.remark }}</td>
               <td class="border px-4 py-2">{{ order.price }}</td>
               <td  class="border px-4 py-2">{{ order.quantity }}</td>
               <td class="border px-4 py-2">{{ order.unit}}</td>         
