@@ -1,7 +1,13 @@
+#####todo==============================================
 task=> inventory search isnot working ,,using class 
 task2=> calculate stock 
-task3 =>purchase fixed 
+
 
 user app =>
 
 menuitem add receipe isnot showing in front view
+
+purchase =>search not working
+
+############################################done============================
+task3 =>purchase fixed =>done list and form
