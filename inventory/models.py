@@ -75,9 +75,10 @@ class Order(models.Model):
 class StockReport(models.Model):
     menu_item_name = models.ForeignKey(
         MenuItem, on_delete=models.CASCADE, null=True)
-    inventory = models.ForeignKey(
+    inventory_quantity = models.ForeignKey(
         Inventory, on_delete=models.CASCADE, null=True)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
+    order_quantity = models.ForeignKey(
+        Order, on_delete=models.CASCADE, null=True)
     stock_remain = models.FloatField(null=True)
 
     def __str__(self):

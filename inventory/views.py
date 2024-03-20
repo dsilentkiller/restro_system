@@ -278,7 +278,6 @@ class PurchaseDeleteView(DeleteView):
 class StockReportListView(ListView):
     model = StockReport
     template_name = 'inventory/stock_report_list.html'
-
     success_url = reverse_lazy('inventory:stock_report')
 
     def get_stock_remain(self):
@@ -305,3 +304,16 @@ class StockReportListView(ListView):
     #         stock_remain[item.item_name] = remaining_stock
     #     context['stock_remain'] = stock_remain
     #     return context
+
+
+def StockReportSearchView(request):
+    query = request.GET.get('q', '')  # retrieve the search query
+    results = StockReport.objects.none()  # initialize an empty queryset
+
+    if query:
+
+        results = StockReport.objects.filter(menu_item_name__icontains=query)
+
+        return render(request, 'inventory/stock_report_list.html', {'object_list': results})
+    else:
+        results = StockReport.objects.none()

@@ -35,7 +35,7 @@
           <th class="px-1 py-0">
             <tr>
               <th class="px-4 py-2 border px-4 py-2" >#</th>
-     
+              <th class="px-4 py-2 border px-4 py-2" >menu item name</th>
               <th class="px-4 py-2  border ">Inventary Quantity</th>
               <th class="px-4 py-2  border ">Order Quantity</th>
               <th  class="px-4 py-2  border ">Remain in Stock</th>
@@ -47,14 +47,15 @@
             {% if object_list %} {% for stock in object_list %}
             <tr>
               <td class="border px-4 py-2">{{ stock.id}}</td>
+              <td class="border px-4 py-2">{{ stock.menu_item_name}}</td>
               <td class="border px-4 py-2">{{ stock.inventory_quantity }}</td>
               <td class="border px-4 py-2">{{ stock.order_quantity }}</td>
               <td class="border px-4 py-2">{{ stock.stock_remain}}</td>
          
               <td>
-             <!--   <a  class="border px-4 py-2"  href="{% url 'inventory:update'  %}"> Edit </a> 
+              <a  class="border px-4 py-2"  href="{% url 'inventory:update'  %}"> Edit </a> 
                 <a class="border px-4 py-2"  href="{% url 'inventory:detail' %}"> View </a> 
-                <a  class="border px-4 py-2" href="/" > Delete </a>  -->
+                <a  class="border px-4 py-2" href="/" > Delete </a>  
               </td>
             </tr>
           {% endfor %}

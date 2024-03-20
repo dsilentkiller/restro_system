@@ -52,6 +52,7 @@ urlpatterns = [
 
 
 
+
     # =================================  purchase===============================
     path('purchase/list/', views.PurchaseListView.as_view(), name='purchase_index'),
     path('purchase/create/',
@@ -61,20 +62,12 @@ urlpatterns = [
          views.PurchaseUpdateView.as_view(), name='purchase_update'),
     path('purchase/detail/', views.PurchaseListView.as_view(),
          name='purchase_detail'),
-
-
-
-
-
     path('stock/report', views.StockReportListView.as_view(),
          name='stock_report'),
+    path('stock/search', views.StockReportSearchView,
+         name='stock_search'),
 
-]
-if settings.DEBUG:  # new
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
-
-# ======================= table=============
+    # ======================= table=============
 
     path('table/create/', views.TableCreateView.as_view(), name='table_create'),
     path('table/list/', views.TableListView.as_view(), name='table_list'),
@@ -86,3 +79,8 @@ if settings.DEBUG:  # new
     #          views.ItemSearchView.as_view(), name='item_search'),
     path('table/search',
          views.SearchView, name='table_search'),
+
+]
+if settings.DEBUG:  # new
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
