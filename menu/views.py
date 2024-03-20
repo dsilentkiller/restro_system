@@ -10,8 +10,8 @@ from menu.forms import MenuItemForm, ReceipeForm, CategoryForm, IngredientForm
 
 class MenuListView(ListView):
     model = MenuItem
-    template_name = 'menu/menuitem_list.html'
-    success_url = reverse_lazy('menu:list')
+    template_name = 'menu/menu_item_list.html'
+    success_url = reverse_lazy('menu:menu_list')
     queryset = MenuItem.objects.all()
 
     def get_context_data(self, **kwargs):
@@ -23,29 +23,41 @@ class MenuListView(ListView):
 class MenuCreateView(CreateView):
     model = MenuItem
     form_class = MenuItemForm
-    template_name = 'menu/menuitem_form.html'
-    success_url = reverse_lazy('menu:list')
+    template_name = 'menu/menu_item_form.html'
+    success_url = reverse_lazy('menu:menu_list')
 
 
-class MenuUpdateView(CreateView):
+class MenuUpdateView(UpdateView):
     model = MenuItem
     form_class = MenuItemForm
-    template_name = 'menu/menuitem_form.html'
-    success_url = reverse_lazy('menu:list')
+    template_name = 'menu/menu_item_form.html'
+    success_url = reverse_lazy('menu:menu_list')
 
 
-class MenuDetailView(CreateView):
+class MenuDetailView(DetailView):
     model = MenuItem
-    template_name = 'menu/menu_detail.html'
-    success_url = reverse_lazy('menu:list')
+    template_name = 'menu/menu_item_detail.html'
+    success_url = reverse_lazy('menu:menu_list')
 
 
 class MenuDeleteView(DeleteView):
     model = MenuItem
-    template_name = 'menu/delete.html'
-    success_url = reverse_lazy('menu:list')
+    template_name = 'menu/menu_item_delete.html'
+    success_url = reverse_lazy('menu:menu_list')
 
-# receipe
+
+def MenuSearchView(request):
+    query = request.GET.get('q', '')  # retrieve the search query
+    results = MenuItem.objects.none()  # initialize an empty queryset
+
+    if query:
+
+        results = MenuItem.objects.filter(name__icontains=query)
+
+        return render(request, 'menu/menu_item_list.html', {'object_list': results})
+    else:
+        results = MenuItem.objects.none()
+# ======================================================================receipe=======================
 
 
 class ReceipeListView(ListView):
@@ -67,14 +79,14 @@ class ReceipeCreateView(CreateView):
     success_url = reverse_lazy('menu:list')
 
 
-class ReceipeUpdateView(CreateView):
+class ReceipeUpdateView(UpdateView):
     model = Receipe
     form_class = ReceipeForm
     template_name = 'menu/receipe/receipe_form.html'
     success_url = reverse_lazy('menu:list')
 
 
-class ReceipeDetailView(CreateView):
+class ReceipeDetailView(DetailView):
     model = Receipe
     template_name = 'menu/receipe/receipe_detail.html'
     success_url = reverse_lazy('menu:list')
@@ -114,7 +126,7 @@ class CategoryUpdateView(UpdateView):
     success_url = reverse_lazy('menu:category_list')
 
 
-class CategoryDetailView(CreateView):
+class CategoryDetailView(DetailView):
     model = Category
     template_name = 'menu/category/category_detail.html'
     success_url = reverse_lazy('menu:category_list')
@@ -162,12 +174,12 @@ class IngredientCreateView(CreateView):
 
 class IngredientUpdateView(UpdateView):
     model = Ingredient
-    form_class = Ingredientgit Form
+    form_class = IngredientForm
     template_name = 'menu/ingredient/ingredient_form.html'
     success_url = reverse_lazy('menu:ingredient_list')
 
 
-class IngredientDetailView(CreateView):
+class IngredientDetailView(DetailView):
     model = Ingredient
     template_name = 'menu/ingredient/ingredient_detail.html'
     success_url = reverse_lazy('menu:ingredient_list')

@@ -6,12 +6,12 @@
 
   <div class="row">
     <div class="flex items-center justify-between">
-        <h5 class="text-xl font-semibold">Menu List</h5>  
-        <a href="{% url 'menu:create' %}" class="text-xl font-semibold text-grey-200 hover:underline hover:text-blue-00 ml-auto">
-         <h5>  Add Menu</h5>
+        <h5 class="text-xl font-semibold">Menu Item List</h5>  
+        <a href="{% url 'menu:menu_create' %}" class="text-xl font-semibold text-grey-200 hover:underline hover:text-blue-00 ml-auto">
+         <h5>  Add Menu Item</h5>
         </a>
      
-      <form method="get" action="/" class="max-w-md mx-auto px-4 py-2 justify-end">
+      <form method="get" action="{% url 'menu:menu_search'%}" class="max-w-md mx-auto px-4 py-2 justify-end">
         <div class="relative">
             <input
             type="search"
@@ -50,10 +50,10 @@
               <td class="border px-4 py-2">{{ menus.category }}</td>
               <td class="border px-4 py-2">{{ menus.price }}</td>
               <td>
-                <a  class="border px-4 py-2"  href="{% url 'menu:update'  %}"> Edit </a> 
-                <a class="border px-4 py-2"  href="{% url 'menu:detail' %}"> View </a> 
-                <a  class="border px-4 py-2" href="{% url 'menu:receipe_create'%}" > add receipe </a>
-                <a  class="border px-4 py-2" href="/" > Delete </a>
+                <a  class="border px-4 py-2"  href="{% url 'menu:menu_update'  menus.id  %}"> Edit </a> 
+                <a class="border px-4 py-2"  href="{% url 'menu:menu_detail'  menus.id %}"> View </a> 
+             
+                <a  class="border px-4 py-2" href="{% url 'menu:menu_delete'  menus.id%}" > Delete </a>
               </td>
             </tr>
           {% endfor %}
@@ -69,7 +69,7 @@
   </div>
   
 </div>
-<!-- /.content -->
+<!-- /.content   -->
 {% endblock %}
 
 

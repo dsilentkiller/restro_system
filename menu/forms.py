@@ -5,7 +5,7 @@ from menu.models import MenuItem, Receipe, Category, Ingredient
 class MenuItemForm(forms.ModelForm):
     class Meta:
         model = MenuItem
-        fields = ('__all__')
+        fields = ('name', 'price', 'category')
         widgets = {
             'item_name': forms.TextInput(attrs={'class': 'forms.control'}),
             'quantity': forms.TextInput(attrs={'class': 'forms.control'}),

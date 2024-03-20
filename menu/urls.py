@@ -7,11 +7,12 @@ app_name = 'menu'
 urlpatterns = [
 
     # menu
-    path('create/', views.MenuCreateView.as_view(), name='create'),
-    path('list/', views.MenuListView.as_view(), name='list'),
-    path('update/<int:pk>', views.MenuUpdateView.as_view(), name='update'),
-    path('detail/<int:pk>', views.MenuListView.as_view(), name='detail'),
-    path('delete/<int:pk>', views.MenuDeleteView.as_view(), name='delete'),
+    path('create/', views.MenuCreateView.as_view(), name='menu_create'),
+    path('list/', views.MenuListView.as_view(), name='menu_list'),
+    path('update/<int:pk>', views.MenuUpdateView.as_view(), name='menu_update'),
+    path('detail/<int:pk>', views.MenuListView.as_view(), name='menu_detail'),
+    path('delete/<int:pk>', views.MenuDeleteView.as_view(), name='menu_delete'),
+    path('menu/search', views.MenuSearchView, name='menu_search'),
 
     # category
     path('category/create/', views.CategoryCreateView.as_view(),
