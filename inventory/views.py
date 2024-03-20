@@ -7,41 +7,42 @@ from inventory.forms import InventoryForm, PurchaseForm, OrderForm
 
 def base(request):
     return render(request, 'inventory/base.html')
-# inventory
+# ===============================================inventory =========================================##
 
 
 class InventoryListView(ListView):
     model = Inventory
     template_name = 'inventory/inventory_list.html'
-    success_url = reverse_lazy('inventory:index')
+    success_url = reverse_lazy('inventory:inventory_list')
 
 
 class InventoryCreateView(CreateView):
     model = Inventory
     form_class = InventoryForm
     template_name = 'inventory/inventory_form.html'
-    success_url = reverse_lazy('inventory:list')
+    success_url = reverse_lazy('inventory:inventory_list')
 
 
 class InventoryUpdateView(UpdateView):
     model = Inventory
     form_class = InventoryForm
     template_name = 'inventory/inventory_form.html'
-    success_url = reverse_lazy('inventory:list')
+    success_url = reverse_lazy('inventory:inventory_list')
 
 
 class InventoryDetailView(DetailView):
     model = Inventory
-    template_name = 'inventory/detail.html'
-    success_url = reverse_lazy('inventory:list')
+    template_name = 'inventory/inventory_detail.html'
+    success_url = reverse_lazy('inventory:inventory_list')
 
 
 class InventoryDeleteView(DeleteView):
     model = Inventory
-    template_name = 'inventory/delete.html'
-    success_url = reverse_lazy('inventory:list')
+    template_name = 'inventory/inventory_delete.html'
+    success_url = reverse_lazy('inventory:inventory_list')
 
 # inventory search using function
+
 
 class InventorySearchView(ListView):
     model = Inventory
@@ -55,13 +56,16 @@ class InventorySearchView(ListView):
         return context
 
     def get_queryset(self):
+        #     category_name = self.request.GET.get("category__name", "")
+        #     item_name = self.request.GET.get("item_name", "")
+        quantity = self.request.GET.get('quantity', '')
         return self.model.objects.filter(
-            category__name__contains=self.request.GET.get(
-                "name", ""),  # key value
-            # category__name__contains=self.request.GET.get("name", ""),
+            # category__name__icontains=category_name,  # key value
+            # item_name__icontains=item_name,
+            quantity__icontains=quantity,
         )
 
-# order
+# ================================================order -============================================================================
 
 
 class OrderListView(ListView):
@@ -95,7 +99,7 @@ class OrderDeleteView(DeleteView):
     model = Order
     template_name = 'inventory/order/order_delete.html'
     success_url = reverse_lazy('inventory:order_list')
-# purchase
+# =================================================================purchase==================================
 
 
 class PurchaseListView(ListView):
@@ -130,7 +134,7 @@ class PurchaseDeleteView(DeleteView):
     template_name = 'inventory/purchase/purchase_delete.html'
     success_url = reverse_lazy('inventory:purchase_index')
 
-# StockReportListView
+# ==================================   StockReportListView ==============================
 
 
 class StockReportListView(ListView):

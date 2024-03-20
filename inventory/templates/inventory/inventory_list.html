@@ -56,9 +56,9 @@
               <td  class="border px-4 py-2">{{ inventory.quantity }}</td>
               <td class="border px-4 py-2">{{ inventory.unit}}</td>         
               <td>
-                <a  class="border px-4 py-2"  href="{% url 'inventory:update'  %}"> Edit </a> 
-                <a class="border px-4 py-2"  href="{% url 'inventory:detail' %}"> View </a> 
-                <a  class="border px-4 py-2" href="/" > Delete </a>
+                <a  class="border px-4 py-2"  href="{% url 'inventory:update' inventory.id  %}"> Edit </a> 
+                <a class="border px-4 py-2"  href="{% url 'inventory:inventory_detail' inventory.id %}"> View </a> 
+                <a  class="border px-4 py-2" href="{% url 'inventory:inventory_delete' inventory.id %}" > Delete </a>
               </td>
             </tr>
           {% endfor %}

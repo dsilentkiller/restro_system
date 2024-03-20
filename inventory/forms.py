@@ -7,13 +7,12 @@ class InventoryForm(forms.ModelForm):
         model = Inventory
         fields = ('__all__')
         widgets = {
-            'item_name': forms.TextInput(attrs={'class': 'forms.control'}),
+            # 'item_name': forms.TextInput(attrs={'class': 'forms.control'}),
 
             'quantity': forms.TextInput(attrs={'class': 'forms.control'}),
             'price': forms.TextInput(attrs={'class': 'forms.control'}),
-            # 'unit': forms.ModelChoiceField(attrs={'class': 'forms.control'}),
             'description': forms.TextInput(attrs={'class': 'forms.control'}),
-            # 'category': forms.ModelChoiceField(attrs={'class': 'forms.control'}),
+
 
         }
 
