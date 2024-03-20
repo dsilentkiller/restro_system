@@ -23,8 +23,8 @@ class Category(models.Model):
 
 
 class Receipe(models.Model):
-    name = models.ForeignKey(
-        Ingredient, on_delete=models.CASCADE, max_length=100, null=True)
+    name = models.OneToOneField(
+        Ingredient, on_delete=models.CASCADE, max_length=100, null=True, unique=True)
     quantity = models.IntegerField(null=True)
     unit = models.CharField(choices=CHOICES, max_length=100, null=True)
 
@@ -34,7 +34,6 @@ class Receipe(models.Model):
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=200, null=True, unique=True)
-
     price = models.FloatField(null=True)
     # image = models.ImageField(upload_to='static', null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)

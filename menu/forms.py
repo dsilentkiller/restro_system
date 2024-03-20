@@ -34,7 +34,7 @@ class ReceipeForm(forms.ModelForm):
         model = Receipe
         fields = ('__all__')
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'forms.control'}),
+
             'quantity': forms.TextInput(attrs={'class': 'forms.control'}),
 
 

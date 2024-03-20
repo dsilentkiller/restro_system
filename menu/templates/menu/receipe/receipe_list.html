@@ -1,4 +1,4 @@
-{% extends '../inventory/base.html' %} {% block content %} 
+{% extends 'inventory/base.html' %} {% block content %} 
 
 
 
@@ -7,7 +7,7 @@
   <div class="row">
     <div class="flex items-center justify-between">
         <h5 class="text-xl font-semibold">Receipe List</h5>  
-        <a href="{% url 'menu:create' %}" class="text-xl font-semibold text-grey-200 hover:underline hover:text-blue-00 ml-auto">
+        <a href="/" class="text-xl font-semibold text-grey-200 hover:underline hover:text-blue-00 ml-auto">
          <h5>  Add Receipe</h5>
         </a>
      
@@ -50,8 +50,8 @@
               <td class="border px-4 py-2">{{ receipe.quantity }}</td>
               <td class="border px-4 py-2">{{ receipe.unit }}</td>
               <td>
-                <a  class="border px-4 py-2"  href="{% url 'menu:update'  %}"> Edit </a> 
-                <a class="border px-4 py-2"  href="{% url 'menu:detail' %}"> View </a> 
+                <a  class="border px-4 py-2"  href="{% url 'menu:receipe_update' receipe.id %}"> Edit </a> 
+                <a class="border px-4 py-2"  href="{% url 'menu:receipe_detail' receipe.id %}"> View </a> 
           
                 <a  class="border px-4 py-2" href="/" > Delete </a>
               </td>

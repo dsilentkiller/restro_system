@@ -38,7 +38,7 @@ class PurchaseForm(forms.ModelForm):
         model = Purchase
         fields = ('__all__')
         widgets = {
-            'item_name': forms.TextInput(attrs={'class': 'forms.control'}),
+
 
             'quantity': forms.TextInput(attrs={'class': 'forms.control'}),
             'price': forms.TextInput(attrs={'class': 'forms.control'}),

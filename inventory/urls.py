@@ -62,6 +62,9 @@ urlpatterns = [
          views.PurchaseUpdateView.as_view(), name='purchase_update'),
     path('purchase/detail/', views.PurchaseListView.as_view(),
          name='purchase_detail'),
+    path('purchase/search', views.PurchaseSearchView, name='purchase_search'),
+
+    # ================================stock report ===================
     path('stock/report', views.StockReportListView.as_view(),
          name='stock_report'),
     path('stock/search', views.StockReportSearchView,

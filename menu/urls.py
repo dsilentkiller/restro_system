@@ -10,7 +10,7 @@ urlpatterns = [
     path('create/', views.MenuCreateView.as_view(), name='menu_create'),
     path('list/', views.MenuListView.as_view(), name='menu_list'),
     path('update/<int:pk>', views.MenuUpdateView.as_view(), name='menu_update'),
-    path('detail/<int:pk>', views.MenuListView.as_view(), name='menu_detail'),
+    path('detail/<int:pk>', views.MenuDetailView.as_view(), name='menu_detail'),
     path('delete/<int:pk>', views.MenuDeleteView.as_view(), name='menu_delete'),
     path('menu/search', views.MenuSearchView, name='menu_search'),
 
@@ -29,10 +29,11 @@ urlpatterns = [
          name='category-search'),
 
 
-    # receipe
-    # menu
-    path('receipe/create/', views.ReceipeCreateView.as_view(), name='receipe_create'),
-    path('receipe/list/', views.ReceipeListView.as_view(), name='receipe_list'),
+    # ====================receipe==================
+
+    path('receipe/create/<int:pk>',
+         views.ReceipeCreateView.as_view(), name='receipe_create'),
+    path('receipe/list/', views.ReceipeListView.as_view(), name='menu_item_list'),
     path('receipe/update/<int:pk>',
          views.ReceipeUpdateView.as_view(), name='receipe_update'),
     path('receipe/detail/<int:pk>',
@@ -40,7 +41,7 @@ urlpatterns = [
     path('receipe/delete/<int:pk>', views.ReceipeDeleteView.as_view(),
          name='receipe_delete'),
 
-    # ingredient
+    # =======ingredient==========================
     path('ingredient/create/', views.IngredientCreateView.as_view(),
          name='ingredient_create'),
     path('ingredient/list/', views.IngredientListView.as_view(),

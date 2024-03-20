@@ -1,1 +1,7 @@
-task=> inventory search isnot working ,,
+task=> inventory search isnot working ,,using class 
+task2=> calculate stock 
+task3 =>purchase fixed 
+
+user app =>
+
+menuitem add receipe isnot showing in front view

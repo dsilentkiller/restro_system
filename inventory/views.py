@@ -272,6 +272,19 @@ class PurchaseDeleteView(DeleteView):
     template_name = 'inventory/purchase/purchase_delete.html'
     success_url = reverse_lazy('inventory:purchase_index')
 
+
+def PurchaseSearchView(request):
+    query = request.GET.get('q', '')  # retrieve the search query
+    results = Purchase.objects.none()  # initialize an empty queryset
+
+    if query:
+
+        results = Purchase.objects.filter(item_name__icontains=query)
+
+        return render(request, 'inventory/purchase/purchase_list.html', {'object_list': results})
+    else:
+        results = Purchase.objects.none()
+
 # ==================================   StockReportListView ==============================
 
 

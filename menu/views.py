@@ -63,7 +63,7 @@ def MenuSearchView(request):
 class ReceipeListView(ListView):
     model = Receipe
     template_name = 'menu/receipe/receipe_list.html'
-    success_url = reverse_lazy('menu:list')
+    success_url = reverse_lazy('menu:menu_item_list')
     queryset = Receipe.objects.all()
 
     def get_context_data(self, **kwargs):
@@ -76,26 +76,26 @@ class ReceipeCreateView(CreateView):
     model = Receipe
     form_class = ReceipeForm
     template_name = 'menu/receipe/receipe_form.html'
-    success_url = reverse_lazy('menu:list')
+    success_url = reverse_lazy('menu:menu_item_list')
 
 
 class ReceipeUpdateView(UpdateView):
     model = Receipe
     form_class = ReceipeForm
     template_name = 'menu/receipe/receipe_form.html'
-    success_url = reverse_lazy('menu:list')
+    success_url = reverse_lazy('menu:receipe_list')
 
 
 class ReceipeDetailView(DetailView):
     model = Receipe
     template_name = 'menu/receipe/receipe_detail.html'
-    success_url = reverse_lazy('menu:list')
+    success_url = reverse_lazy('menu:receipe_list')
 
 
 class ReceipeDeleteView(DeleteView):
     model = Receipe
     template_name = 'menu/receipe/receipe_delete.html'
-    success_url = reverse_lazy('menu:list')
+    success_url = reverse_lazy('menu:receipe_list')
 
 # =========================== category==============================
 
