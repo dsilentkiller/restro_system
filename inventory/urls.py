@@ -19,14 +19,14 @@ urlpatterns = [
     path('inventory/search',
          views.InventorySearchView.as_view(), name='inventory_search'),
     # =========================item==================
-    #     path('item/create/', views.ItemCreateView.as_view(), name='item_create'),
-    #     path('item/list/', views.ItemListView.as_view(), name='item_list'),
-    #     path('item/update/<int:pk>', views.ItemUpdateView.as_view(), name='item_update'),
-
-    #     path('item/delete/<int:pk>', views.ItemDeleteView.as_view(),
-    #          name='item_delete'),
-    #     path('item/search',
-    #          views.ItemSearchView.as_view(), name='item_search'),
+    path('item/create/', views.ItemCreateView.as_view(), name='item_create'),
+    path('item/list/', views.ItemListView.as_view(), name='item_list'),
+    path('item/update/<int:pk>', views.ItemUpdateView.as_view(), name='item_update'),
+    path('item/detail/<int:pk>', views.ItemDetailView.as_view(), name='item_detail'),
+    path('item/delete/<int:pk>', views.ItemDeleteView.as_view(),
+         name='item_delete'),
+    path('item/search',
+         views.ItemSearchView.as_view(), name='item_search'),
 
 
 

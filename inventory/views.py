@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from inventory.models import Inventory, Order, Purchase, StockReport
+from inventory.models import Inventory, Order, Purchase, StockReport, Item
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from inventory.forms import InventoryForm, PurchaseForm, OrderForm
+from inventory.forms import InventoryForm, PurchaseForm, OrderForm, ItemForm
 
 
 def base(request):
@@ -49,21 +49,77 @@ class InventorySearchView(ListView):
     template_name = "inventory/inventory_list.html"
     context_object_name = "inventory"
 
-    success_url = reverse_lazy('inventory:list')
+    success_url = reverse_lazy('inventory:inventory_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
 
     def get_queryset(self):
-        #     category_name = self.request.GET.get("category__name", "")
-        #     item_name = self.request.GET.get("item_name", "")
-        quantity = self.request.GET.get('quantity', '')
         return self.model.objects.filter(
-            # category__name__icontains=category_name,  # key value
-            # item_name__icontains=item_name,
-            quantity__icontains=quantity,
+            category__contains=self.request.GET.get(
+                "category__name", ""),  # key value
+            # foreign key bhakole search garna milena
+            item__name__icontains=self.request.GET.get("item_name", ""),
+            # price__contains=self.request.GET.get("price", ""),
+            # quantity__contains=self.request.GET.get("quantity", ""),
         )
+################################################################## item###########################
+
+
+class ItemListView(ListView):
+    model = Item
+    template_name = 'inventory/item/item_list.html'
+    # success_url = reverse_lazy('inventory:item_list')
+
+
+class ItemCreateView(CreateView):
+    model = Item
+    form_class = ItemForm
+    template_name = 'inventory/item/item_form.html'
+    success_url = reverse_lazy('inventory:item_list')
+
+
+class ItemUpdateView(UpdateView):
+    model = Item
+    form_class = ItemForm
+    template_name = 'inventory/item/item_form.html'
+    success_url = reverse_lazy('inventory:item_list')
+
+
+class ItemDetailView(DetailView):
+    model = Item
+    template_name = 'inventory/item/item_detail.html'
+    success_url = reverse_lazy('inventory:item_list')
+
+
+class ItemDeleteView(DeleteView):
+    model = Item
+    template_name = 'inventory/item/item_delete.html'
+    success_url = reverse_lazy('inventory:item_list')
+
+# inventory search using function
+
+
+class ItemSearchView(ListView):
+    model = Item
+    template_name = "inventory/item/item_list.html"
+    context_object_name = "item"
+
+    # success_url = reverse_lazy('inventory:item_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_queryset(self, request):
+        query = self.request.GET.get("q", "")
+        results = Item.objects.none()
+        if query:
+            results = Item.objects.filter(name__icontains=query)
+            return render(request, 'inventory/item/item_list.html', {'item': results})
+        else:
+            results = Item.objects.none()
 
 # ================================================order -============================================================================
 
