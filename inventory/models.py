@@ -83,3 +83,12 @@ class StockReport(models.Model):
 
     def __str__(self):
         return f'{self.menu_item_name}-{self.inventory}-{self.order}-{self.stock_remain}'
+# when  order is done, inventory quantity-receipe quantity  =result
+
+    def update_total(self):
+        receipe_total = self.menu_item_name.total
+        inventory_total = self.inventory_quantity.total
+        stock = inventory_total - receipe_total
+        self.total = stock
+        self.save()
+        return stock

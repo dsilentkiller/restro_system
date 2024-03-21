@@ -13,7 +13,7 @@ Role_Choices = (('waiter', 'waiter'),
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, is_staff=False, is_active=True, **extra_fields):
         email = UserManager.normalize_email(email)
-        extra_fields.pop('username', None)
+        extra_fields.pop(username=None)
 
         user = self.model(email=email, is_active=is_active,
                           is_staff=is_staff, **extra_fields)
@@ -30,6 +30,7 @@ class UserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
+    username = None
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=200)
     password = models.CharField(max_length=8)
@@ -46,13 +47,15 @@ class CustomUser(AbstractUser):
         'Does the user have a specific permission?'
         return True  # does the user has specific permission if so return true
 
+    # @property
     # def is_staff(self):
     #     'Is the user a member of staff??'
     #     return self.staff
 
-    def is_admin(self):
-        'Is the user a admin member?'
-        return self.admin
+    # @property
+    # def is_admin(self):
+    #     'Is the user a admin member?'
+    #     return self.admin
 
     def _str__(self):
         return self.email
