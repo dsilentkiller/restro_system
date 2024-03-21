@@ -7,7 +7,7 @@ from django.utils import timezone
 Role_Choices = (('waiter', 'waiter'),
                 ('accountant', 'accountant'),
                 ('chef', 'chef'),
-                ('staff', 'staff'),)
+                ('staff', 'staff'))
 
 
 class UserManager(BaseUserManager):
@@ -39,5 +39,20 @@ class CustomUser(AbstractUser):
     date_joined = models.DateTimeField(default=timezone.now)
 
     REQUIRED_FIELDS = []
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = ('email')
     objects = UserManager()
+
+    def has_permission(self, perm, obj=None):
+        'Does the user have a specific permission?'
+        return True  # does the user has specific permission if so return true
+
+    # def is_staff(self):
+    #     'Is the user a member of staff??'
+    #     return self.staff
+
+    def is_admin(self):
+        'Is the user a admin member?'
+        return self.admin
+
+    def _str__(self):
+        return self.email
