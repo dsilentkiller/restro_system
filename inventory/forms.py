@@ -1,5 +1,5 @@
 from django import forms
-from inventory.models import Inventory, Order, Purchase, Item, Table, StockReport
+from inventory.models import Inventory, Order, Purchase, Item, Table
 
 
 class InventoryForm(forms.ModelForm):
@@ -68,11 +68,11 @@ class TableForm(forms.ModelForm):
         }
 
 
-class StockForm(forms.ModelForm):
-    class Meta:
-        model = StockReport
-        fields = ('__all__')
-        widgets = {
-            'menu_item_name': forms.TextInput(attrs={'class': 'forms.control'}),
-            # 'inventory_quantity': forms.TextInput(attrs={'class': 'forms.control'})
-        }
+# class StockForm(forms.ModelForm):
+#     class Meta:
+#         model = StockReport
+#         fields = ('__all__')
+#         widgets = {
+#             'menu_item_name': forms.TextInput(attrs={'class': 'forms.control'}),
+#             # 'inventory_quantity': forms.TextInput(attrs={'class': 'forms.control'})
+#         }

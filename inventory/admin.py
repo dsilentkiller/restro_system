@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inventory.models import Inventory, Order, Table, StockReport, Purchase, Item
+from inventory.models import Inventory, Order, Table, Purchase, Item
 # Register your models here.
 admin.site.register(Inventory)
 admin.site.register(Order)
@@ -16,4 +16,4 @@ admin.site.register(Purchase)
 #         return obj.stock_remain
 
 
-admin.site.register(StockReport)
+# admin.site.register(StockReport)

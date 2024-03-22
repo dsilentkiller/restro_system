@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from inventory.models import Inventory, Order, Purchase, StockReport, Item, Table
+from inventory.models import Inventory, Order, Purchase, Item, Table
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from inventory.forms import InventoryForm, PurchaseForm, OrderForm, ItemForm, TableForm
@@ -288,21 +288,21 @@ def PurchaseSearchView(request):
 # ==================================   StockReportListView ==============================
 
 
-class StockReportListView(ListView):
-    model = StockReport
-    template_name = 'inventory/stock_report_list.html'
-    success_url = reverse_lazy('inventory:stock_report')
+# class StockReportListView(ListView):
+#     model = StockReport
+#     template_name = 'inventory/stock_report_list.html'
+#     success_url = reverse_lazy('inventory:stock_report')
 
-    def get_stock_remain(self):
-        stock = StockReport.objects.all()
+#     def get_stock_remain(self):
+#         stock = StockReport.objects.all()
 
-    def stock_remain(self):
-        inventory = Inventory.objects.filter(quantity='quantity')
-        stock = StockReport.objects.all()
-        inventory_quantity = self.inventory.quantity
-        order_quantity = self.order.quantity
-        remaining_stock = inventory_quantity - order_quantity
-        print(remaining_stock)
+#     def stock_remain(self):
+#         inventory = Inventory.objects.filter(quantity='quantity')
+#         stock = StockReport.objects.all()
+#         inventory_quantity = self.inventory.quantity
+#         order_quantity = self.order.quantity
+#         remaining_stock = inventory_quantity - order_quantity
+#         print(remaining_stock)
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -319,14 +319,14 @@ class StockReportListView(ListView):
     #     return context
 
 
-def StockReportSearchView(request):
-    query = request.GET.get('q', '')  # retrieve the search query
-    results = StockReport.objects.none()  # initialize an empty queryset
+# def StockReportSearchView(request):
+#     query = request.GET.get('q', '')  # retrieve the search query
+#     results = StockReport.objects.none()  # initialize an empty queryset
 
-    if query:
+#     if query:
 
-        results = StockReport.objects.filter(menu_item_name__icontains=query)
+#         results = StockReport.objects.filter(menu_item_name__icontains=query)
 
-        return render(request, 'inventory/stock_report_list.html', {'object_list': results})
-    else:
-        results = StockReport.objects.none()
+#         return render(request, 'inventory/stock_report_list.html', {'object_list': results})
+#     else:
+#         results = StockReport.objects.none()

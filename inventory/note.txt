@@ -15,3 +15,11 @@ task3 =>purchase fixed =>done list and form
 #######################user login ####
 user: paaru 
 password :paaru150@#
+
+menu ko order click gadra 
+
+form valid cha bhane , inventory .obj .all  garera receipe.obj all() garera quantity ghataune , if 1 bhands badhi cha bhane multiply garne
+
+receipe bata ingredient tanne 
+inventory tanne 
+inventory.obj.get().update(-)

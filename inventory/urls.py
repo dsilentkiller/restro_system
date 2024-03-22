@@ -65,10 +65,10 @@ urlpatterns = [
     path('purchase/search', views.PurchaseSearchView, name='purchase_search'),
 
     # ================================stock report ===================
-    path('stock/report', views.StockReportListView.as_view(),
-         name='stock_report'),
-    path('stock/search', views.StockReportSearchView,
-         name='stock_search'),
+    #     path('stock/report', views.StockReportListView.as_view(),
+    #          name='stock_report'),
+    #     path('stock/search', views.StockReportSearchView,
+    #          name='stock_search'),
 
     # ======================= table=============
 

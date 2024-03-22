@@ -12,12 +12,22 @@ class MenuListView(ListView):
     model = MenuItem
     template_name = 'menu/menu_item_list.html'
     success_url = reverse_lazy('menu:menu_list')
-    queryset = MenuItem.objects.all()
+    # queryset = MenuItem.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menus'] = self.queryset
         return context
+
+    def total_receipe_quantity(self):
+        total_quantity = self.receipe.count()
+        return total_quantity
+
+        menu_item = MenuItem.menu_objects.get(id=1)
+        print(menu_item)
+
+        # total_quantity = menu_item.total_receipe_quantity()
+        # print(total_quantity)
 
 
 class MenuCreateView(CreateView):
