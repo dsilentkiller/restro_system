@@ -9,15 +9,6 @@ CHOICES = (('kg', 'kg'),
            ('plate', 'plate'),)
 
 
-class InventoryManager(models.Manager):
-
-    # def category(self, category_name):
-    #     return self.get_queryset().filter(category_name=category_name)
-
-    def filter_by_quantity(self, quantity):
-        return self.get_queryset().filter(quantity=quantity)
-
-
 class Table(models.Model):
     name = models.CharField(max_length=50)
     floor = models.CharField(max_length=100)
@@ -42,7 +33,6 @@ class Purchase(models.Model):
     unit = models.CharField(choices=CHOICES, max_length=100)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    # vendor=models.ForeignKey(vendor)
 
     def __str__(self):
         return self.item_name
@@ -50,17 +40,15 @@ class Purchase(models.Model):
 
 class Inventory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    item_name = models.ForeignKey(
+    ingredient_name = models.ForeignKey(
         Ingredient, on_delete=models.CASCADE, max_length=100)
     quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
     description = models.TextField()
-    inventory_objects = InventoryManager()
-    # vendor=models.ForeignKey(vendor)
 
     def __str__(self):
-        return f'{self.item_name}-{self.category}'
+        return f'{self.category}-{self.ingredient_name}-{self.quantity}-{self.unit}--{self.price}'
 
 
 class Order(models.Model):
@@ -73,26 +61,15 @@ class Order(models.Model):
     remark = models.TextField(null=True)
     table = models.ForeignKey(
         Table, on_delete=models.CASCADE, max_length=100, null=True)
-    # vendor=models.ForeignKey(vendor)
 
     def __str__(self):
-        return f'{self.menu_item_name}-{self.category}'
+        return f'{self.menu_item_name}-{self.category}-{self.quantity}-{self.unit}-{self.price}'
 
-    # def calculate_stock(self):
-    #     stock= self.inventory.quantity-order.quantity)
-
-    def stock(request):
-        inventory = Inventory.inventory_objects.all()
-        print(inventory)
-
-    def calculate(request):
-        inventory_quantity = Inventory.inventory_objects.filter_by_name(10)
-        menu_quantity = MenuItem.menu_objects.filter_by_quantity(10)
-        total = inventory_quantity - menu_quantity
-        return total
-    
-
-
+    # def calculate(request):
+    #     inventory_quantity = Inventory.inventory_objects.all()
+    #     menu_quantity = MenuItem.objects.all()
+    #     total = inventory_quantity - menu_quantity
+    #     return total
 
 
 # class StockReport(models.Model):

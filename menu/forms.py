@@ -5,9 +5,9 @@ from menu.models import MenuItem, Receipe, Category, Ingredient
 class MenuItemForm(forms.ModelForm):
     class Meta:
         model = MenuItem
-        fields = ('name', 'price', 'category')
+        fields = ('food_name', 'price', 'category')
         widgets = {
-            'item_name': forms.TextInput(attrs={'class': 'forms.control'}),
+            'food_name': forms.TextInput(attrs={'class': 'forms.control'}),
             'quantity': forms.TextInput(attrs={'class': 'forms.control'}),
             'price': forms.TextInput(attrs={'class': 'forms.control'}),
             # 'unit': forms.ModelChoiceField(attrs={'class': 'forms.control'}),

@@ -36,7 +36,7 @@
           <th class="px-1 py-0">
             <tr>
               <th class="px-4 py-2 border px-4 py-2" >#</th>
-              <th class="px-4 py-2  border ">item Name</th>
+              <th class="px-4 py-2  border ">Fooditem Name</th>
               <th class="px-4 py-2  border ">Category</th>
               <th  class="px-4 py-2  border ">price</th>       
               <th col="3" class="px-0 py-0  border ">action</th>
@@ -46,7 +46,7 @@
             {% if object_list %} {% for menus in object_list %}
             <tr>
               <td class="border px-4 py-2">{{ menus.id}}</td>
-              <td class="border px-4 py-2">{{ menus.name }}</td>
+              <td class="border px-4 py-2">{{ menus.food_name }}</td>
               <td class="border px-4 py-2">{{ menus.category }}</td>
               <td class="border px-4 py-2">{{ menus.price }}</td>
               <td>

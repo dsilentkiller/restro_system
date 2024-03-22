@@ -1,5 +1,6 @@
 from django.db import models
 
+
 CHOICES = (('kg', 'kg'),
            ('gm', 'gm'),
            ('piece', 'piece'),
@@ -7,20 +8,12 @@ CHOICES = (('kg', 'kg'),
            ('liter', 'liter'),)
 
 
-class MenuItemManager(models.Manager):
-
-    # def category(self, category_name):
-    #     return self.get_queryset().filter(category_name=category_name)
-
-    def filter_by_quantity(self, quantity):
-        return super().get_queryset().filter(receipe_quantity=quantity)
-
-
 class Ingredient(models.Model):
     name = models.CharField(max_length=50)
+    quantity = models.FloatField(null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}-{self.quantity}'
 
 
 class Category(models.Model):
@@ -31,29 +24,30 @@ class Category(models.Model):
         return self.name
 
 
-class Receipe(models.Model):
-
-    name = models.OneToOneField(
-        Ingredient, on_delete=models.CASCADE, max_length=100, null=True, unique=True)
-    quantity = models.IntegerField(null=True)
-    unit = models.CharField(choices=CHOICES, max_length=100, null=True)
-
-    def __str__(self):
-        return f'{self.name}-{self.quantity}-{self.unit}'
-
-
 class MenuItem(models.Model):
-    name = models.CharField(max_length=200, null=True, unique=True)
-    price = models.FloatField(null=True)
-    # image = models.ImageField(upload_to='static', null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    receipe = models.ManyToManyField(
-        Receipe)
-    menu_objects = MenuItemManager()
+    food_name = models.CharField(max_length=200, null=True, unique=True)
+    price = models.FloatField(null=True)
+
+    # receipe = models.ManyToManyField(
+    #     Receipe,null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.category}-{self.food_name}-{self.price}'
 
     # def total_receipe_quantity(self):
     #     total_quantity = self.receipe.count()
     #     return total_quantity
+
+
+class Receipe(models.Model):
+    food_name = models.ForeignKey(
+        MenuItem, on_delete=models.CASCADE, null=True)
+
+    ingredient_name = models.OneToOneField(
+        Ingredient, on_delete=models.CASCADE, max_length=100, null=True)
+    quantity = models.IntegerField(null=True)
+    unit = models.CharField(choices=CHOICES, max_length=100, null=True)
+
+    def __str__(self):
+        return f'{self.food_name}-{self.ingredient_name}-{self.quantity}-{self.unit}'

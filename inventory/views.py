@@ -3,6 +3,7 @@ from inventory.models import Inventory, Order, Purchase, Item, Table
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from inventory.forms import InventoryForm, PurchaseForm, OrderForm, ItemForm, TableForm
+from menu.models import Receipe
 
 
 def base(request):
@@ -217,7 +218,19 @@ class OrderCreateView(CreateView):
     form_class = OrderForm
     template_name = 'inventory/order/order_form.html'
     success_url = reverse_lazy('inventory:order_list')
-    # order = Order.objects.all()
+    order = Order.objects.all()
+
+    def calculate(self):
+
+        # if order is created:
+        inventory_quantity = Inventory.objects.all()
+        receipe_quantity = Receipe.objects.all()
+        results = {}  # initial
+        for inventory_item, receipe_item in zip(inventory_quantity, receipe_quantity):
+            results[inventory_item.id] = inventory_item.quantity - receipe_item.quantity
+
+        return results
+    # print(calculate(8))
 
 
 class OrderUpdateView(UpdateView):
