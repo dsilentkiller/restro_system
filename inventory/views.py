@@ -225,7 +225,13 @@ class OrderCreateView(CreateView):
         order.save()
         # get order item
         order_items = Recipe.objects.filter(food_name=order.menu_item_name)
-
+        for order_item in order_items:
+            quantity_used = order.qty_of_order * order_item.qty_in_recipe
+            inventory_item = Inventory.objects.get(
+                ingredient_name=order_item.ingredient_name.ingredient_name)
+            inventory_item.quantity -= quantity_used
+            inventory_item.save()
+        return super().form_valid(form)
     # def form_valid(self, form):
     #     response = super().form_valid(form)
     #     order = form.save(commit=False)

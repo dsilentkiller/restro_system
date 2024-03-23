@@ -53,9 +53,9 @@ class Inventory(models.Model):
 
 class Order(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    menu_item_name = models.ForeignKey(
+    order_item = models.ForeignKey(
         MenuItem, on_delete=models.CASCADE, max_length=100, null=True)
-    quantity = models.FloatField()
+    order_quantity = models.FloatField()
     price = models.FloatField()
     unit = models.CharField(choices=CHOICES, max_length=100)
     remark = models.TextField(null=True)
