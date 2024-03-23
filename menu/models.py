@@ -40,7 +40,7 @@ class MenuItem(models.Model):
     #     return total_quantity
 
 
-class Receipe(models.Model):
+class Recipe(models.Model):
     food_name = models.ForeignKey(
         MenuItem, on_delete=models.CASCADE, null=True)
 

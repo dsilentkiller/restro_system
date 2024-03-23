@@ -65,12 +65,8 @@ class Order(models.Model):
     def __str__(self):
         return f'{self.menu_item_name}-{self.category}-{self.quantity}-{self.unit}-{self.price}'
 
-    # def calculate(request):
-    #     inventory_quantity = Inventory.inventory_objects.all()
-    #     menu_quantity = MenuItem.objects.all()
-    #     total = inventory_quantity - menu_quantity
-    #     return total
-
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
 # class StockReport(models.Model):
 #     menu_item_name = models.ForeignKey(
@@ -89,12 +85,12 @@ class Order(models.Model):
 
     # def __str__(self):
     #     return f'{self.menu_item_name}-{self.inventory}-{self.order}-{self.stock_remain}'
-# when  order is done, inventory quantity-receipe quantity  =result
+# when  order is done, inventory quantity-recipe quantity  =result
 
     # def update_total(self):
-    #     receipe_total = self.menu_item_name.total
+    #     recipe_total = self.menu_item_name.total
     #     inventory_total = self.inventory_quantity.total
-    #     stock = inventory_total - receipe_total
+    #     stock = inventory_total - recipe_total
     #     self.total = stock
     #     self.save()
     #     return stock

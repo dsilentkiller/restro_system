@@ -2,10 +2,10 @@
 
 # Create your views here.
 from django.shortcuts import render
-from menu.models import MenuItem, Receipe, Category, Ingredient
+from menu.models import MenuItem, Recipe, Category, Ingredient
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from menu.forms import MenuItemForm, ReceipeForm, CategoryForm, IngredientForm
+from menu.forms import MenuItemForm, RecipeForm, CategoryForm, IngredientForm
 
 
 class MenuListView(ListView):
@@ -19,14 +19,14 @@ class MenuListView(ListView):
         context['menus'] = self.queryset
         return context
 
-    # def total_receipe_quantity(self):
-    #     total_quantity = self.receipe.count()
+    # def total_recipe_quantity(self):
+    #     total_quantity = self.recipe.count()
     #     return total_quantity
 
         # menu_item = MenuItem.menu_objects.get(id=1)
         # print(menu_item)
 
-        # total_quantity = menu_item.total_receipe_quantity()
+        # total_quantity = menu_item.total_recipe_quantity()
         # print(total_quantity)
 
 
@@ -67,45 +67,45 @@ def MenuSearchView(request):
         return render(request, 'menu/menu_item_list.html', {'object_list': results})
     else:
         results = MenuItem.objects.none()
-# ======================================================================receipe=======================
+# ======================================================================recipe=======================
 
 
-class ReceipeListView(ListView):
-    model = Receipe
-    template_name = 'menu/receipe/receipe_list.html'
+class RecipeListView(ListView):
+    model = Recipe
+    template_name = 'menu/recipe/recipe_list.html'
     success_url = reverse_lazy('menu:menu_item_list')
-    queryset = Receipe.objects.all()
+    queryset = Recipe.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['receipe'] = self.queryset
+        context['recipe'] = self.queryset
         return context
 
 
-class ReceipeCreateView(CreateView):
-    model = Receipe
-    form_class = ReceipeForm
-    template_name = 'menu/receipe/receipe_form.html'
+class RecipeCreateView(CreateView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = 'menu/recipe/recipe_form.html'
     success_url = reverse_lazy('menu:menu_item_list')
 
 
-class ReceipeUpdateView(UpdateView):
-    model = Receipe
-    form_class = ReceipeForm
-    template_name = 'menu/receipe/receipe_form.html'
-    success_url = reverse_lazy('menu:receipe_list')
+class RecipeUpdateView(UpdateView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = 'menu/recipe/recipe_form.html'
+    success_url = reverse_lazy('menu:recipe_list')
 
 
-class ReceipeDetailView(DetailView):
-    model = Receipe
-    template_name = 'menu/receipe/receipe_detail.html'
-    success_url = reverse_lazy('menu:receipe_list')
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'menu/recipe/recipe_detail.html'
+    success_url = reverse_lazy('menu:recipe_list')
 
 
-class ReceipeDeleteView(DeleteView):
-    model = Receipe
-    template_name = 'menu/receipe/receipe_delete.html'
-    success_url = reverse_lazy('menu:receipe_list')
+class RecipeDeleteView(DeleteView):
+    model = Recipe
+    template_name = 'menu/recipe/recipe_delete.html'
+    success_url = reverse_lazy('menu:recipe_list')
 
 # =========================== category==============================
 
@@ -114,11 +114,11 @@ class CategoryListView(ListView):
     model = Category
     template_name = 'menu/category/category_list.html'
     success_url = reverse_lazy('menu:category_list')
-    # queryset = Receipe.objects.all()
+    # queryset = Recipe.objects.all()
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
-    #     context['receipe'] = self.queryset
+    #     context['recipe'] = self.queryset
     #     return context
 
 
@@ -167,11 +167,11 @@ class IngredientListView(ListView):
     model = Ingredient
     template_name = 'menu/ingredient/ingredient_list.html'
     success_url = reverse_lazy('menu:ingredient_list')
-    # queryset = Receipe.objects.all()
+    # queryset = Recipe.objects.all()
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
-    #     context['receipe'] = self.queryset
+    #     context['recipe'] = self.queryset
     #     return context
 
 

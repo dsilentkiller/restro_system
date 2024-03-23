@@ -3,7 +3,7 @@ from inventory.models import Inventory, Order, Purchase, Item, Table
 from django.views.generic import CreateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from inventory.forms import InventoryForm, PurchaseForm, OrderForm, ItemForm, TableForm
-from menu.models import Receipe
+from menu.models import Recipe
 
 
 def base(request):
@@ -220,17 +220,30 @@ class OrderCreateView(CreateView):
     success_url = reverse_lazy('inventory:order_list')
     order = Order.objects.all()
 
-    def calculate(self):
+    def form_valid(self, form):
+        order = form.save(commit=False)
+        order.save()
+        # get order item
+        order_items = Recipe.objects.filter(food_name=order.menu_item_name)
 
-        # if order is created:
-        inventory_quantity = Inventory.objects.all()
-        receipe_quantity = Receipe.objects.all()
-        results = {}  # initial
-        for inventory_item, receipe_item in zip(inventory_quantity, receipe_quantity):
-            results[inventory_item.id] = inventory_item.quantity - receipe_item.quantity
+    # def form_valid(self, form):
+    #     response = super().form_valid(form)
+    #     order = form.save(commit=False)
+    #     order.save()
 
-        return results
-    # print(calculate(8))
+    #     recipes = Recipe.objects.filter(food_name=order.menu_item_name)
+    #     for recipe in recipes:
+    #         inventory_item = Inventory.objects.get(
+    #             ingredient_name=recipe.ingredient_name)
+    #         new_quantity = inventory_item.quantity - \
+    #             (recipe.quantity * order.quantity)
+    #         if new_quantity >= 0:
+    #             inventory_item.quantity = new_quantity
+    #             inventory_item.save()
+    #         else:
+    #             print('insufficient quantity')
+
+    #     return response
 
 
 class OrderUpdateView(UpdateView):

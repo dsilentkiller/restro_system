@@ -6,9 +6,9 @@
 
   <div class="row">
     <div class="flex items-center justify-between">
-        <h5 class="text-xl font-semibold">Receipe List</h5>  
+        <h5 class="text-xl font-semibold">Recipe List</h5>  
         <a href="/" class="text-xl font-semibold text-grey-200 hover:underline hover:text-blue-00 ml-auto">
-         <h5>  Add Receipe</h5>
+         <h5>  Add Recipe</h5>
         </a>
      
       <form method="get" action="/" class="max-w-md mx-auto px-4 py-2 justify-end">
@@ -43,15 +43,15 @@
             </tr>
           </th>
           <tbody>
-            {% if object_list %} {% for receipe in object_list %}
+            {% if object_list %} {% for recipe in object_list %}
             <tr>
-              <td class="border px-4 py-2">{{ receipe.id}}</td>
-              <td class="border px-4 py-2">{{ receipe.food_name }}</td>
-              <td class="border px-4 py-2">{{ receipe.quantity }}</td>
-              <td class="border px-4 py-2">{{ receipe.unit }}</td>
+              <td class="border px-4 py-2">{{ recipe.id}}</td>
+              <td class="border px-4 py-2">{{ recipe.food_name }}</td>
+              <td class="border px-4 py-2">{{ recipe.quantity }}</td>
+              <td class="border px-4 py-2">{{ recipe.unit }}</td>
               <td>
-                <a  class="border px-4 py-2"  href="{% url 'menu:receipe_update' receipe.id %}"> Edit </a> 
-                <a class="border px-4 py-2"  href="{% url 'menu:receipe_detail' receipe.id %}"> View </a> 
+                <a  class="border px-4 py-2"  href="{% url 'menu:recipe_update' recipe.id %}"> Edit </a> 
+                <a class="border px-4 py-2"  href="{% url 'menu:recipe_detail' recipe.id %}"> View </a> 
           
                 <a  class="border px-4 py-2" href="/" > Delete </a>
               </td>

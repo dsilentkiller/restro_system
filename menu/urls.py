@@ -29,17 +29,17 @@ urlpatterns = [
          name='category-search'),
 
 
-    # ====================receipe==================
+    # ====================recipe==================
 
-    path('receipe/create/<int:pk>',
-         views.ReceipeCreateView.as_view(), name='receipe_create'),
-    path('receipe/list/', views.ReceipeListView.as_view(), name='menu_item_list'),
-    path('receipe/update/<int:pk>',
-         views.ReceipeUpdateView.as_view(), name='receipe_update'),
-    path('receipe/detail/<int:pk>',
-         views.ReceipeListView.as_view(), name='receipe_detail'),
-    path('receipe/delete/<int:pk>', views.ReceipeDeleteView.as_view(),
-         name='receipe_delete'),
+    path('recipe/create/<int:pk>',
+         views.RecipeCreateView.as_view(), name='recipe_create'),
+    path('recipe/list/', views.RecipeListView.as_view(), name='menu_item_list'),
+    path('recipe/update/<int:pk>',
+         views.RecipeUpdateView.as_view(), name='recipe_update'),
+    path('recipe/detail/<int:pk>',
+         views.RecipeListView.as_view(), name='recipe_detail'),
+    path('recipe/delete/<int:pk>', views.RecipeDeleteView.as_view(),
+         name='recipe_delete'),
 
     # =======ingredient==========================
     path('ingredient/create/', views.IngredientCreateView.as_view(),
